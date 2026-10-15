@@ -1,0 +1,2 @@
+import type { MetadataRoute } from 'next';import { siteUrl } from '@/lib/utils';
+export default function sitemap():MetadataRoute.Sitemap{const routes=['','/services','/projects','/projects/the-final-testament','/about','/careers','/contact','/github','/privacy-policy','/terms-and-conditions'];return routes.map(route=>({url:`${siteUrl}${route}`,lastModified:new Date(),changeFrequency:route===''?'weekly':'monthly',priority:route===''?1:0.7}));}
