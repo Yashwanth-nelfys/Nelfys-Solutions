@@ -85,6 +85,18 @@ Then manually verify each route, mobile navigation, keyboard focus, form validat
 
 ## Deploy to Vercel
 
+### Important: Vercel dependency/root-directory check
+
+This project pins compatible major versions: Next.js 16, `eslint-config-next` 16, and ESLint 9. The Vercel error mentioning `eslint-config-next@14.2.35` means Vercel is not installing the `package.json` from this project (or an older commit is being deployed). Do not fix this by using `--force` or `--legacy-peer-deps`.
+
+Before deploying:
+
+1. Confirm the Git repository contains this project's `package.json` at the selected Vercel **Root Directory**. If the repository contains the `nelfys-solutions/` folder, set Root Directory to `nelfys-solutions`; if the contents of that folder are at the repository root, leave Root Directory as `.`.
+2. In the Vercel deployment's source commit, open `package.json` and confirm `next` and `eslint-config-next` are both version `16.0.0` and `eslint` is version `9.38.0`.
+3. Commit and push the corrected `package.json`, then trigger a new deployment. If Vercel still reports the old dependency, check the selected repository, branch, commit, and Root Directory.
+4. Use Node.js 20.9 or newer in Vercel Project Settings.
+
+
 1. Push this project to a Git repository.
 2. Import the repository in Vercel.
 3. Configure `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`, and `NEXT_PUBLIC_SITE_URL` in the project's environment settings.
